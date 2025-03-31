@@ -51,10 +51,14 @@ export type HeroSectionType = {
 	lang?: Language
 }
 
-const HeroSection: NextPage<HeroSectionType> = ({ className = "", lang = "ru" }) => {
+const HeroSection: NextPage<HeroSectionType> = ({ className = "" }) => {
 	const pathname = usePathname()
 	const router = useRouter()
-	const t = translations[lang]
+
+	// Определяем язык на основе текущего URL
+	const currentLang = pathname.startsWith("/en") ? "en" : pathname.startsWith("/zh") ? "zh" : "ru"
+
+	const t = translations[currentLang]
 
 	const onTextClick = useCallback((selector: string) => {
 		const anchor = document.querySelector(`[data-scroll-to='${selector}']`)
@@ -68,8 +72,8 @@ const HeroSection: NextPage<HeroSectionType> = ({ className = "", lang = "ru" })
 	}
 
 	const changeLanguage = (newLang: Language) => {
-		// Используем window.location.href для полной перезагрузки страницы с новым языком
-		window.location.href = `/${newLang}`
+		// Используем роутер для программной навигации без полной перезагрузки страницы
+		router.push(`/${newLang}`)
 	}
 
 	return (
@@ -119,27 +123,27 @@ const HeroSection: NextPage<HeroSectionType> = ({ className = "", lang = "ru" })
 						<div className="relative">{t.personalAccount}</div>
 					</div>
 				</div>
-				<div className="w-[98px] rounded-3xl border-gray border-[1px] border-solid box-border flex flex-row items-center justify-start py-0 pl-0 pr-1.5 gap-2 text-3xs-5 text-gray">
+				<div className="rounded-full bg-[#e9ead7] border-gray border-[1px] border-solid box-border flex flex-row items-center justify-start py-1 px-1 gap-1 text-3xs-5 text-[#537160]">
 					<button
-						className={`w-9 rounded-[22.58px] ${lang === "ru" ? "bg-gray text-oldlace" : "bg-transparent text-gray"
-							} border-gray border-[0.9px] border-solid box-border flex flex-row items-center justify-center py-[11px] px-[9px]`}
+						className={`rounded-full ${currentLang === "ru" ? "bg-[#537160] text-[#e9ead7]" : "bg-transparent text-[#537160]"
+							} flex flex-row items-center justify-center py-1 px-2 transition-colors duration-200`}
 						onClick={() => changeLanguage("ru")}
 					>
-						<div className="relative inline-block min-w-[17px]">РУС</div>
+						<div className="text-xs font-medium">РУС</div>
 					</button>
 					<button
-						className={`relative inline-block min-w-[19px] ${lang === "en" ? "text-oldlace bg-gray rounded-[22.58px] py-[11px] px-[9px]" : ""
-							}`}
+						className={`rounded-full ${currentLang === "en" ? "bg-[#537160] text-[#e9ead7]" : "bg-transparent text-[#537160]"
+							} flex flex-row items-center justify-center py-1 px-2 transition-colors duration-200`}
 						onClick={() => changeLanguage("en")}
 					>
-						ENG
+						<div className="text-xs font-medium">ENG</div>
 					</button>
 					<button
-						className={`relative inline-block min-w-[19px] ${lang === "zh" ? "text-oldlace bg-gray rounded-[22.58px] py-[11px] px-[9px]" : ""
-							}`}
+						className={`rounded-full ${currentLang === "zh" ? "bg-[#537160] text-[#e9ead7]" : "bg-transparent text-[#537160]"
+							} flex flex-row items-center justify-center py-1 px-2 transition-colors duration-200`}
 						onClick={() => changeLanguage("zh")}
 					>
-						中文
+						<div className="text-xs font-medium">中文</div>
 					</button>
 				</div>
 			</header>
@@ -204,6 +208,10 @@ const HeroSection: NextPage<HeroSectionType> = ({ className = "", lang = "ru" })
 }
 
 export default HeroSection
+
+
+
+
 
 
 

@@ -15,7 +15,7 @@ const translations = {
 		designCredit: "Website design and creation - asyama",
 	},
 	ru: {
-		schoolName: "Школа Астрологии Оксаны Юрло��ой",
+		schoolName: "Школа Астрологии Оксаны Юрловой",
 		designCredit: "Дизайн и создание сайта - asyama",
 	},
 	zh: {
@@ -40,15 +40,15 @@ export default function EnglishPage() {
 			<HeroSection />
 			<AboutMeSection lang="en" />
 			<ServicesSection lang="en" />
-			<AstrologerConspectsSection />
-			<AstroYogaSection />
+			<AstrologerConspectsSection lang="en" />
+			<AstroYogaSection lang="en" />
 			<footer className="self-stretch flex flex-col items-end justify-start gap-[7px] max-w-full text-center text-base text-black font-ibm-plex-sans">
 				<div
 					className="self-stretch flex flex-row items-start justify-start flex-wrap content-start py-10 px-40 box-border gap-40 max-w-full mq750:gap-20 mq750:pl-20 mq750:pr-20 mq750:box-border mq450:gap-10 mq450:pl-5 mq450:pr-5 mq450:box-border"
 					data-scroll-to="infoContainer"
 				>
-					<FooterContent />
-					<ContactInfo />
+					<FooterContent lang="en" />
+					<ContactInfo lang="en" />
 				</div>
 				<div className="self-stretch flex flex-row items-start justify-center py-0 pl-[21px] pr-5">
 					<div className="w-[339px] relative inline-block">
